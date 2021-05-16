@@ -2,8 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start": "lerna run start",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run start --stream --parallel",
+    "prebuild": "npm run bootstrap",
+    "build": "lerna run build --stream --scope=@todo-list/common"
   },
   "devDependencies": {
     "lerna": "^4.0.0"

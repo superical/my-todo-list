@@ -1,11 +1,12 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "strict": true,
     "module": "commonjs",
     "jsx": "preserve",
     "esModuleInterop": true,
-    "sourceMap": true,
-    "allowJs": true,
+    "allowJs": false,
+    "outDir": "dist",
     "target": "ES2016",
     "lib": [
       "es6",

@@ -1,17 +1,17 @@
 import { v4 as uuid } from 'uuid';
+import { TaskStatus } from '@todo-list/common';
+import { TaskPriority } from '@todo-list/common';
 
 export class Task {
 
-  private readonly taskId: string;
+  public id: string;
 
   public constructor(
     public title: string,
-    public isCompleted: boolean = false
+    public priority: TaskPriority = TaskPriority.Low,
+    public status: TaskStatus = TaskStatus.ToDo,
+    public dueDate: Date | null = null
   ) {
-    this.taskId = uuid();
-  }
-
-  public get id(): string {
-    return this.taskId;
+    this.id = uuid();
   }
 }

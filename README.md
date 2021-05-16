@@ -6,14 +6,14 @@ Install dependencies:
 ```
 npm install
 ```
-Bootstrap project:
+Build (and bootstrap) the project:
 ```
-npm run bootstrap
+npm run build
 ```
 Start the development server:
 ```
 npm start
 ```
-This will start both the frontend and API server on port 3000 and 3001 respectively.
+This will start both the frontend and API server on port `3000` and `3001` respectively.
 
 Open `http://localhost:3000` in browser.

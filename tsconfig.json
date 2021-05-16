@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "target": "ES2016",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "lib": [
+      "es6",
+      "es2016",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    { "path": "packages/common" },
+    { "path": "packages/todo-api" },
+    { "path": "packages/todo-frontend" }
+  ]
+}

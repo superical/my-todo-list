@@ -1,5 +1,8 @@
 export class ResourceNotFoundError extends Error {
-  constructor(message: string) {
+
+  public readonly statusCode: number = 404;
+
+  constructor(message: string, public errors: string[] = []) {
     super(message);
     this.name = 'ResourceNotFoundError';
   }

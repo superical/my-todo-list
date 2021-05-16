@@ -1,0 +1,27 @@
+{
+  "name": "@todo-list/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -b",
+    "start": "tsc -b -w --preserveWatchOutput"
+  },
+  "files": [
+    "lib"
+  ],
+  "author": "Seth",
+  "license": "ISC",
+  "dependencies": {
+    "parcel-bundler": "^1.6.1"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
+  }
+}
