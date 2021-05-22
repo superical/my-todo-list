@@ -1,6 +1,8 @@
 # My Todo List
 Yet another todo list application. ✔️✔️✔️
 
+![Todo List Demo](docs/demo-screencap.gif)
+
 ### Development Setup
 Install dependencies:
 ```
