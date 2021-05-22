@@ -8,12 +8,13 @@ export class CreateTaskDto {
     public title: string,
     public priority: TaskPriority,
     public status: TaskStatus,
+    public userId: string,
     public dueDate: Date | null = null
   ) {
   }
 
   public static validate(obj: Record<string, any>): string[] {
-    const { title, priority, status, dueDate } = obj;
+    const { title, priority, status, dueDate, userId } = obj;
     const errors: string[] = [];
     if (!title || validator.isEmpty(title)) {
       errors.push('Task title cannot be empty');
@@ -50,6 +51,12 @@ export class CreateTaskDto {
       }
     }
 
+    if (validator.isEmpty(String(userId))) {
+      errors.push('User ID of author cannot be empty');
+    } else {
+      // TODO: Check if user ID exists
+    }
+
     return errors;
   }
 
@@ -58,12 +65,14 @@ export class CreateTaskDto {
       title: obj.title ?? 'Untitled Task',
       status: TaskStatus[TaskStatus[obj.status as TaskStatus] as keyof typeof TaskStatus] ?? TaskStatus.ToDo,
       priority: TaskPriority[TaskPriority[obj.priority as number] as keyof typeof TaskPriority] ?? TaskPriority.Low,
-      dueDate: (obj.dueDate && new Date(obj.dueDate)) ?? null
+      dueDate: (obj.dueDate && new Date(obj.dueDate)) ?? null,
+      userId: obj.userId
     };
     return new CreateTaskDto(
       props.title,
       props.priority,
       props.status,
+      props.userId,
       props.dueDate
     );
   }

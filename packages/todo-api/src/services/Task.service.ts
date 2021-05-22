@@ -4,10 +4,14 @@ import { CreateTaskDto } from '../dto/CreateTask.dto';
 import { ResourceNotFoundError } from '../errors/ResourceNotFoundError';
 import { ITaskRepository } from '../repositories/Task.repository';
 import { TaskQueryParamsDto } from '../dto/TaskQueryParams.dto';
+import { IUserRepository } from '../repositories/User.repository';
 
 export class TaskService {
 
-  public constructor(private taskRepository: ITaskRepository) {
+  public constructor(
+    private taskRepository: ITaskRepository,
+    private userRepository: IUserRepository
+  ) {
   }
 
   public getTasks(query?: TaskQueryParamsDto): TaskDto[] {
@@ -28,10 +32,13 @@ export class TaskService {
   }
 
   public createTask(createTaskDto: CreateTaskDto): TaskDto {
+    const authorUser = this.userRepository.getById(createTaskDto.userId);
+    if (!authorUser) throw new ResourceNotFoundError(`User ID ${createTaskDto.userId} cannot be found`);
     const task = new Task(
       createTaskDto.title,
       createTaskDto.priority,
       createTaskDto.status,
+      authorUser,
       createTaskDto.dueDate
     );
     this.taskRepository.save(task);

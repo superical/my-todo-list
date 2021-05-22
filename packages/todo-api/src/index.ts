@@ -7,6 +7,7 @@ import { cors } from './middlewares/cors';
 import { TaskRepository } from './repositories/Task.repository';
 import { database } from './db';
 import { catchAllErrors } from './middlewares/catchAllErrors';
+import { UserRepository } from './repositories/User.repository';
 
 const app: Application = express();
 app.use(morgan('combined'));
@@ -17,7 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port: number = 3001;
 
 const controllers = [
-  new TaskController(express.Router(), new TaskService(new TaskRepository(database)))
+  new TaskController(
+    express.Router(),
+    new TaskService(new TaskRepository(database), new UserRepository(database)),
+  )
 ];
 
 controllers.forEach(controller => {
