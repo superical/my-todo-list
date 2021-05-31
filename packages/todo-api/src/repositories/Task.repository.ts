@@ -29,6 +29,11 @@ export class TaskRepository implements ITaskRepository {
 
   public filterByParameters(params: TaskQueryParamsDto): Task[] {
     return this.filterBy(task => {
+      const targetUserPredicate = () => params.targetUserId === undefined ? true : task.author.id === params.targetUserId;
+      // const friendPredicate = () => params.selfId === undefined ? false : task.author.id === params.selfId;
+      const friendPredicate = () => params.selfId === undefined ? false : (
+        task.author.friends.findIndex(friend => friend.id === params.selfId) !== -1 || task.author.id === params.selfId
+      );
       const priorityPredicate = () => params.priority === undefined ? true : task.priority === params.priority;
       const statusPredicate = () => params.status === undefined ? true : task.status === params.status;
       const overduePredicate = () => {
@@ -45,6 +50,8 @@ export class TaskRepository implements ITaskRepository {
       };
 
       return ![
+        targetUserPredicate,
+        friendPredicate,
         priorityPredicate,
         statusPredicate,
         overduePredicate

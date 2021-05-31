@@ -42,6 +42,8 @@ export class TaskController {
 
   public async getAllTasks(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
+      // const token = req.headers['authorization'];
+      // Decrypt the token to get the user
       const query: Partial<TaskQueryParamsDto> = TaskQueryParamsDto.from(req.query);
       const tasks = this.service.getTasks(query);
       const body = {

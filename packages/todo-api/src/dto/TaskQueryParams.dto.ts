@@ -1,11 +1,14 @@
 import validator from 'validator';
 import { TaskPriority } from '@todo-list/common';
 import { TaskStatus } from '@todo-list/common';
+import { User } from '../models/User';
 
 export class TaskQueryParamsDto {
   public priority?: TaskPriority;
   public status?: TaskStatus;
   public overdue?: boolean;
+  public selfId?: string;
+  public targetUserId?: string;
 
   public static validate(params: Record<string, any>): string[] {
     const { overdue, status, priority } = params;
@@ -39,6 +42,8 @@ export class TaskQueryParamsDto {
     params.overdue = query.overdue !== undefined ? validator.toBoolean(query.overdue) : undefined;
     params.status = TaskStatus[TaskStatus[query.status as TaskStatus] as keyof typeof TaskStatus];
     params.priority = TaskPriority[TaskPriority[query.priority as number] as keyof typeof TaskPriority];
+    params.selfId = query.selfId;
+    params.targetUserId = query.targetUserId;
     return params;
   }
 }
